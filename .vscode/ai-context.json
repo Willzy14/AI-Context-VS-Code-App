@@ -1,0 +1,43 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-02-02T00:00:00.000Z",
+  "project": {
+    "name": "AI Context Keeper",
+    "description": "VS Code extension that persists AI conversation context across sessions. Injects project knowledge into Copilot chats so the AI remembers what you were working on.",
+    "stack": ["TypeScript", "VS Code Extension API", "esbuild"],
+    "repository": "local"
+  },
+  "architecture": {
+    "overview": "Single extension with chat participant (@context) that loads/saves context from JSON files",
+    "keyPaths": {
+      "src/extension.ts": "Main entry point - activates extension, registers commands and chat participant",
+      "src/contextManager.ts": "Core logic - load/save context, token budgeting, format context for injection",
+      "src/chatParticipant.ts": "@context chat participant with slash commands (/remember, /status, /forget, /checkpoint)",
+      "src/autoAnalyzer.ts": "Detects project stack from package.json, requirements.txt, etc.",
+      "src/commands.ts": "VS Code command implementations",
+      "src/statusBar.ts": "Status bar indicator",
+      "src/types.ts": "TypeScript interfaces"
+    }
+  },
+  "conventions": {
+    "naming": "camelCase for functions/variables, PascalCase for types",
+    "patterns": ["Two-file context system: shared (committed) + local (gitignored)"]
+  },
+  "decisions": [
+    {
+      "date": "2026-02-02",
+      "decision": "Use two context files instead of one",
+      "reason": "ai-context.json is committed for team sharing, ai-context.local.json is gitignored for personal notes"
+    },
+    {
+      "date": "2026-02-02",
+      "decision": "4000 token default budget",
+      "reason": "Balances context richness with leaving room for actual conversation"
+    },
+    {
+      "date": "2026-02-02",
+      "decision": "Use esbuild instead of webpack",
+      "reason": "Much faster builds, simpler config"
+    }
+  ]
+}
