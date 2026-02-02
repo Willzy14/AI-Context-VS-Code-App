@@ -4,6 +4,16 @@
 
 Ever switch between projects and lose all the context your AI assistant had? This extension solves that by maintaining persistent project context that automatically gets injected into your Copilot conversations.
 
+## 🚀 Quick Start (Development)
+
+1. Open `C:\Users\samwi\Projects\ai-context-keeper` in VS Code
+2. Press **F5** to launch Extension Development Host
+3. In the new window, test:
+   - `Ctrl+Shift+P` → `AI Context: Initialize`
+   - In Copilot Chat: `@context /status`
+
+**Status:** Extension compiles and runs ✅ - needs testing of @context chat participant
+
 ## Features
 
 ### 🧠 Automatic Context Injection
