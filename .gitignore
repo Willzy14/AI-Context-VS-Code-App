@@ -1,0 +1,25 @@
+# AI Context Keeper - personal context
+.vscode/ai-context.local.json
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+out/
+
+# VS Code extension package
+*.vsix
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+*.swp
+*.swo

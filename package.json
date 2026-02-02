@@ -1,0 +1,117 @@
+{
+  "name": "ai-context-keeper",
+  "displayName": "AI Context Keeper",
+  "description": "Persist AI conversation context across sessions for seamless project continuity",
+  "version": "0.1.0",
+  "publisher": "samwills",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "AI",
+    "Chat",
+    "Other"
+  ],
+  "keywords": [
+    "ai",
+    "copilot",
+    "context",
+    "memory",
+    "persistence"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "aiContext.initialize",
+        "title": "AI Context: Initialize Project Context"
+      },
+      {
+        "command": "aiContext.update",
+        "title": "AI Context: Update Context Summary"
+      },
+      {
+        "command": "aiContext.edit",
+        "title": "AI Context: Edit Context File"
+      },
+      {
+        "command": "aiContext.remember",
+        "title": "AI Context: Remember Something"
+      },
+      {
+        "command": "aiContext.clear",
+        "title": "AI Context: Clear History"
+      },
+      {
+        "command": "aiContext.showStatus",
+        "title": "AI Context: Show Status"
+      }
+    ],
+    "chatParticipants": [
+      {
+        "id": "ai-context-keeper.context",
+        "name": "context",
+        "fullName": "AI Context Keeper",
+        "description": "Chat with full project context automatically injected",
+        "isSticky": false,
+        "commands": [
+          {
+            "name": "status",
+            "description": "Show current project context status"
+          },
+          {
+            "name": "remember",
+            "description": "Add something to persistent memory"
+          },
+          {
+            "name": "forget",
+            "description": "Remove something from context"
+          },
+          {
+            "name": "checkpoint",
+            "description": "Save current state as a named checkpoint"
+          }
+        ]
+      }
+    ],
+    "configuration": {
+      "title": "AI Context Keeper",
+      "properties": {
+        "aiContext.maxTokens": {
+          "type": "number",
+          "default": 4000,
+          "description": "Maximum tokens to include in context injection"
+        },
+        "aiContext.autoSummarize": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically summarize conversations on session end"
+        },
+        "aiContext.includeGitInfo": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include git branch and recent commits in context"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "esbuild ./src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node",
+    "watch": "npm run compile -- --watch",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "esbuild": "^0.19.8",
+    "eslint": "^8.54.0",
+    "typescript": "^5.3.2"
+  }
+}
